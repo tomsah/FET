@@ -1,0 +1,28 @@
+  <h1>Photos</h1>
+
+<div class="col-md-12">
+  <div class="row">
+    <div class="col-md-8 table-holder">
+      <table class="table table-striped ">
+      <thead>
+        <th>Name</th>
+        <th>file type</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="photo in photos.awesomePhotos">
+          <td>{{photo.name}}</td>
+          <td>{{photo.type}}</td>
+        </tr>
+      </tbody>
+    </table>    
+    </div>
+  </div>
+<div class="row">
+    <div ng-repeat="photo in photos.awesomePhotos">
+    <div class="col-md-3 img-holder">
+      <img ng-src="http://localhost:9000/assets/pics/{{photo.name}}" alt=""> 
+    </div>   
+  </div>
+</div>
+
+</div>

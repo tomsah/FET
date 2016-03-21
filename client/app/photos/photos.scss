@@ -1,0 +1,14 @@
+.table-holder{
+	margin: 0 auto;
+	float:none;
+	padding: 30px 0;
+}
+
+.img-holder{
+	border: 1px solid green;
+	height: 800px;
+	overflow: auto;
+	img{
+		width: 100%;
+	}
+}
