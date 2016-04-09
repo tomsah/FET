@@ -59,6 +59,26 @@ function handleError(res, statusCode) {
   };
 }
 
+
+// run dalek test
+export function runDalek(req, res){
+  const spawn = require('child_process').spawn;
+  const ls = spawn('dalek', ['dalek/screenshot.js', '-r console,json']);
+
+  ls.stdout.on('data', (data) => {
+    console.log(`stdout: ${data}`);
+  });
+
+  ls.stderr.on('data', (data) => {
+    console.log(`stderr: ${data}`);
+  });
+
+  ls.on('close', (code) => {
+    console.log(`child process exited with code ${code}`);
+  });
+    console.log("RUN dalekxxxxx", Thing);
+}
+
 // Gets a list of Things
 export function index(req, res) {
   return Thing.find().sort({_id:-1}).limit(20).exec()
@@ -100,3 +120,14 @@ export function destroy(req, res) {
     .then(removeEntity(res))
     .catch(handleError(res));
 }
+
+
+
+
+
+
+
+
+
+
+

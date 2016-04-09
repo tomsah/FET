@@ -31,6 +31,27 @@ class MainController {
   deleteThing(thing) {
     this.$http.delete('/api/things/' + thing._id);
   }
+
+  runDalek() {
+    console.log('Dalek should run');
+    this.$http.get('/api/things/runDalek');
+    this.$http.post('/api/things/runDalek', { name: this.newThing });
+  }
+
+
+  readPic() {
+      this.$http.get('../../../report/dalek.json').then(response => {
+      this.picture = response.data;
+      this.socket.syncUpdates('picture', this.picture);
+      console.log(this.picture, 'hello');
+      });
+
+    // this.$http.get('../../../report/dalek.json').success(function(data) {
+    //   this.$scope.tests = data;
+    //     console.log(data);
+    // });
+    }
+
 }
 
 angular.module('fetApp')

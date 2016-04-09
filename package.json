@@ -35,6 +35,7 @@
     "chai-as-promised": "^5.1.0",
     "chai-things": "^0.2.0",
     "connect-livereload": "^0.5.3",
+    "dalek-reporter-json": "0.0.2",
     "dalekjs": "0.0.9",
     "grunt": "~0.4.5",
     "grunt-angular-templates": "^0.5.4",

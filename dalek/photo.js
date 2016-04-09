@@ -51,12 +51,16 @@ var diretoryTreeToObj = function(dir, done) {
 
 //create a json object of the images run node tree.js
 //TODO make it available to angular
-var dirTree = ('pics/');
+var dirTree = ('../pics');
 diretoryTreeToObj(dirTree, function(err, res){
     if(err){
     console.error(err);	
     }  
     console.log(JSON.stringify(res));
+
+
+    // Write result in json file !!!
+    
 });
 
 
