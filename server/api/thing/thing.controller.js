@@ -11,6 +11,9 @@
 
 import _ from 'lodash';
 import Thing from './thing.model';
+var fs = require('fs')
+var readFile = require('fs-readfile-promise')
+
 
 function respondWithResult(res, statusCode) {
   statusCode = statusCode || 200;
@@ -62,8 +65,12 @@ function handleError(res, statusCode) {
 
 // run dalek test
 export function runDalek(req, res){
+  //console.log('Req Body', req.body);
+  var url = req.body.url;
+  // pickup parameter from Angular / HTTP request
   const spawn = require('child_process').spawn;
-  const ls = spawn('dalek', ['dalek/screenshot.js', '-r console,json']);
+  // pass it to dalek/screenshot in -u parameter
+  const ls = spawn('dalek', ['dalek/screenshot.js', '-r console,json', '-a=' + url]);
 
   ls.stdout.on('data', (data) => {
     console.log(`stdout: ${data}`);
@@ -76,8 +83,46 @@ export function runDalek(req, res){
   ls.on('close', (code) => {
     console.log(`child process exited with code ${code}`);
   });
-    console.log("RUN dalekxxxxx", Thing);
+    //console.log("RUN dalekxxxxx", Thing);
 }
+
+var file2watch = __dirname + '/../../../report/dalek.json'; // which file to watch
+// Read report/dalekjs and return it on http://localhost:9000/api/things/reportDalek
+export function reportDalek(req, res) {
+  //return res.send('YO MAMA!');
+  return readFile(file2watch)
+    .then(function(buffer) {
+      res.write(buffer.toString());
+      res.end();
+    })
+    .catch(err => console.log(err.message))
+
+
+  //  fs.readFile( file2watch, 'utf8', function (err,data) {
+  //     if (err) {
+  //       console.log(err);
+  //     }
+  //     console.log(data);
+  //     //res.JSON.parse(data);  
+  //     //var body = JSON.parse(data);
+  //     //res.send(JSON.parse(data));
+  //     res.write(data);
+  //     res.end();
+  //     //x = data.toString();
+  //     //res.json(data);
+
+  // });
+
+}
+
+  function iSeeYou(curr, prev){
+    if(curr.size != prev.size){ // if there's been a change to the file (size change)
+    fs.readFile(file2watch,'utf8', reportDalek) // read the file contents, call readDalekReport
+    }
+  }
+fs.watchFile(file2watch, iSeeYou); // add a watcher to a file
+
+
 
 // Gets a list of Things
 export function index(req, res) {

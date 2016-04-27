@@ -32,27 +32,30 @@
 //          }
 //     }
 
-
-
+// adding custom argument to dalek => url
+var argv = require('minimist')(process.argv.slice(3));
 // multiple screenshot 
+module.exports = {
+		'A lot of screenshots': function (test) {
+		var url = argv['a'];
 
-        module.exports = {
-
-          'A lot of screenshots': function (test) {
-             var resolutions = [{width: 1280, height: 1024}, {width: 1024, height: 768}, {width: 400, height: 600}];
-             //var pages = ['http://facebook.com', 'http://twitter.com', 'http://dalekjs.com'];
-         	 var pages = this.newThing;
-             resolutions.forEach(function (res) {
-                 pages.forEach(function (page) {
-                     test.open(page)
-                         .resize(res)
-                         .screenshot('pics/' + res.width + '_' + res.height + '_' + page.replace('http://', '') + '.png')
-                 });
+         var resolutions = [{width: 1280, height: 1024}, {width: 780 , height: 1024}, {width: 400, height: 600}];
+         // pickup parameter from CLI
+         // pass it to pages array
+         var pages = [url];
+     	 //var pages = this.newThing;
+         resolutions.forEach(function (res) {
+             pages.forEach(function (page) {
+                 test.open(page)
+                     .resize(res)
+                     //.wait(1000)
+                     .screenshot('client/assets/pics/' + res.width + '_' + res.height + '_' + page.replace('https://', '') + '.png')
              });
-         
-             test.done();
+         });
+     
+         test.done();
+     }
+}
 
-             //now write your json
-             //node photo.js
-         }
-        }
+
+

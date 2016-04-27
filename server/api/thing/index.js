@@ -6,8 +6,8 @@ var controller = require('./thing.controller');
 var router = express.Router();
 
 router.get('/', controller.index);
-router.get('/runDalek', controller.runDalek);
-router.get('../../../report', controller.runDalek);
+router.post('/runDalek', controller.runDalek);
+router.get('/reportDalek', controller.reportDalek);
 router.get('/:id', controller.show);
 router.post('/', controller.create);
 router.put('/:id', controller.update);

@@ -10,9 +10,9 @@
   <div class="row">
     <div class="col-lg-12">
       <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in $ctrl.awesomeThings">
-        <li><a href="#" uib-tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="$ctrl.deleteThing(thing)">&times;</button></a></li>
-      </ul>
+ <!--      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in $ctrl.awesomeThings">
+        <li><a href="#" uib-tooltip="{{thing.info}}">{{thing.value}}<button type="button" class="close" ng-click="$ctrl.deleteThing(thing)">&times;</button></a></li>
+      </ul> -->
     </div>
   </div>
 
@@ -26,6 +26,36 @@
       </span>
     </p>
   </form>
+
+<div></div>
+
+
+<!--   <div class="row">
+    <div class="col-md-8 table-holder">
+      <table class="table table-striped ">
+      <thead>
+        <th>Name</th>
+        <th>file type</th>
+      </thead>
+      <tbody>
+        <tr ng-repeat="pic in $ctrl.awesomeThings">
+          <td>{{pic}}</td>
+          <td>{{pic.value}}</td>
+          <td><img ng-src="http://localhost:9000/assets/pics/{{pic.value.replace('client/assets/pics/', '')}}" alt=""></td>
+        </tr>
+      </tbody>
+    </table>    
+    </div>
+  </div> -->
+<div class="row">
+    <div ng-repeat="pic in $ctrl.awesomeThings" ng-if="pic.type === 'screenshot' ">
+    <div class="col-md-4 img-holder">
+      <h2>{{pic.value.replace('client/assets/pics/', '')}} </h2>
+      <img ng-src="http://localhost:9000/assets/pics/{{pic.value.replace('client/assets/pics/', '')}}" alt="">
+    </div>   
+  </div>
 </div>
 
-<div ng-repeat="pic in $ctrl.picture">yo yo {{pic.picture}}</div>
+</div>
+
+<!-- <div ng-repeat="pic in $ctrl.picture">yo yo {{pic.picture}}</div> -->
